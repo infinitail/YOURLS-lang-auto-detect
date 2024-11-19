@@ -34,6 +34,8 @@ function infinitail_lang_auto_detect(string $yourls_locale) {
     // Get most preferred language if mo file is available
     $preferred_lang = get_avaliable_most_preferred_lang($preferred_langs);
     if ($preferred_lang) {
+        // (I cant understand why yourls_load_default_textdomain() doesnt work as expected...)
+        infinitail_load_textdomain($preferred_lang);
         return $preferred_lang;
     }
 
@@ -82,7 +84,6 @@ function get_avaliable_most_preferred_lang(array $preferred_langs) {
     foreach ($preferred_langs as $preferred_lang) {
         // Find exact match
         if (in_array($preferred_lang, $available_langs)) {
-            infinitail_load_textdomain($preferred_lang);
             return $preferred_lang;
         }
 
@@ -90,7 +91,6 @@ function get_avaliable_most_preferred_lang(array $preferred_langs) {
         foreach ($available_langs as $available_lang) {
             $lang_partial = locale_get_primary_language($available_lang);
             if ($lang_partial === $preferred_lang) {
-                infinitail_load_textdomain($available_lang);
                 return $available_lang;
             }
         }
@@ -101,7 +101,6 @@ function get_avaliable_most_preferred_lang(array $preferred_langs) {
 
 /**
  * Load specified lang's .mo file
- * (I cant understand why yourls_load_default_textdomain() doesnt work as expected...)
  *
  * @param string $lang
  * @return bool
