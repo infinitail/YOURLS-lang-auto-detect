@@ -34,6 +34,10 @@ function infinitail_lang_auto_detect(string $yourls_locale) {
     // Get most preferred language if mo file is available
     $preferred_lang = get_avaliable_most_preferred_lang($preferred_langs);
     if ($preferred_lang) {
+        if ($preferred_lang == 'en') {
+            return $yourls_locale;
+        }
+
         // (I cant understand why yourls_load_default_textdomain() doesnt work as expected...)
         infinitail_load_textdomain($preferred_lang);
         return $preferred_lang;
@@ -66,7 +70,7 @@ function get_preferred_langs(string $accept_lang) {
         $weighted_lang_list[$weight] = $lang_tag;
     }
 
-    arsort($weighted_lang_list);
+    arsort($weighted_lang_list, SORT_NUMERIC);
     $preferred_langs = array_values($weighted_lang_list);
     return $preferred_langs;
 }
