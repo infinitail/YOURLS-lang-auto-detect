@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Lang auto detect
-Plugin URI: https://github.com/infinitail/YOURLS-lang-auto-detect
+Plugin URI: https://github.com/infinitail/YOURLS_lang-auto-detect
 Description: Automatic detection of the language setting from the web browser and changes the display language accordingly.
 Version: 0.1
 Author: Infinitail
